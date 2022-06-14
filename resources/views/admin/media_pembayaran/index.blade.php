@@ -1,19 +1,19 @@
 @extends('admin.layouts.master')
-@section('fasilitas','active')
+@section('media_pembayaran','active')
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Data Fasilitas</h1>
+    <h1>Data Media Pembayaran</h1>
   </div>
    <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Table Fasilitas</h4>
+                    <h4>Table Media Pembayaran</h4>
                     <div class="card-header-form">
                       <form>
                         <div class="input-group">
-                          <a href="{{ url('admin/fasilitas/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                          <a href="{{ url('admin/media_pembayaran/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
                           <input type="text" class="form-control" placeholder="Search">
                           <div class="input-group-btn">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -28,8 +28,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Foto</th>
+                                <th>Nama Bank</th>
+                                <th>No Rekening</th>
+                                <th>Atas Nama</th>
+                                <th>Logo</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,13 +42,15 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td><img width="200" height="200" src="{{ asset($item->foto) }}" class="img-thumbnail" alt=""></td>
+                                    <td>{{ $item->nama_bank }}</td>
+                                    <td>{{ $item->no_rekening }}</td>
+                                    <td>{{ $item->atas_nama }}</td>
+                                    <td><img width="200" height="200" src="{{ asset($item->logo) }}" class="img-thumbnail" alt=""></td>
                                     <td>
-                                        <form method="POST" action="{{ url('admin/fasilitas/'.$item->id) }}">
+                                        <form method="POST" action="{{ url('admin/media_pembayaran/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('admin/fasilitas/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
+                                        <a href="{{ url('admin/media_pembayaran/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
                                         <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="far fa-edit"></i>Delete</button>
                                         </form>
                                     </td>

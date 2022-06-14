@@ -10,6 +10,7 @@
               <li class="menu-header">Dashboard</li>
               <li class="@yield('dashboard')"><a class="nav-link" href="blank.html"><i class="fas fa-columns"></i> <span>Dashboard</span></a></li>
               <li class="menu-header">Master</li>
+              <li class="@yield('media_pembayaran')"><a class="nav-link" href="{{ url('admin/media_pembayaran') }}"><i class="fas fa-credit-card"></i><span>Media Pembayaran</span></a></li>
               <li class="@yield('fasilitas')"><a class="nav-link" href="{{ url('admin/fasilitas') }}"><i class="fas fa-couch"></i> <span>Fasilitas</span></a></li>
 
             </ul>

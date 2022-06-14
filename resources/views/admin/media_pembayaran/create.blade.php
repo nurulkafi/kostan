@@ -3,24 +3,31 @@
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Edit Fasilitas</h1>
+    <h1>Tambah Media Pembayaran</h1>
   </div>
    <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-body p-0">
-            <form action="{{ url('admin/fasilitas/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('admin/media_pembayaran') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method("PUT")
             <div class="p-4">
                 <div class="form-group col-md-6">
-                    <label for="">Nama Fasilitas</label>
-                    <input type="text" value="{{ $data->nama }}" name="nama" id="" class="form-control">
+                    <label for="">Nama Media Pembayaran</label>
+                    <input type="text" name="nama" id="" class="form-control">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="">Foto</label>
+                    <label for="">Nomor Rekening</label>
+                    <input type="text" name="norek" id="" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Nama Pemilik Rekening</label>
+                    <input type="text" name="atas_nama" id="" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Logo</label>
                     <br>
-                    <img id="output" src="{{ asset($data->foto) }}" class="img-thumbnail mb-2" width="200px" height="200px"  />
+                    <img id="output" class="img-thumbnail mb-2" width="200px" height="200px"  />
                     <br>
                     <input type="file" name="image" class="form-control" accept="image/*" onchange="loadFile(event)">
                 </div>

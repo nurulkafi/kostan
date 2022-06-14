@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\MediaPembayaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('admin/fasilitas',FasilitasController::class);
+Route::resource('admin/media_pembayaran', MediaPembayaranController::class);

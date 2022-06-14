@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fasilitas;
+use App\Models\MediaPembayaran;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 use File;
 
-class FasilitasController extends Controller
+class MediaPembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class FasilitasController extends Controller
     public function index()
     {
         //
-        $data = Fasilitas::get();
-        return view('admin.fasilitas.index',compact('data'));
+        $data = MediaPembayaran::get();
+        return view('admin.media_pembayaran.index', compact('data'));
     }
 
     /**
@@ -29,7 +29,7 @@ class FasilitasController extends Controller
     public function create()
     {
         //
-        return view('admin.fasilitas.create');
+        return view('admin.media_pembayaran.create');
     }
 
     /**
@@ -40,17 +40,22 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        $nama = $request->nama;
+        $atas_nama = $request->atas_nama;
+        $no_rek = $request->norek;
         $image = $request->file('image');
         $nama_photo = rand() . $image->getClientOriginalName();
-        $image->move('images/fasilitas', $nama_photo);
-        $photo = 'images/fasilitas/' . $nama_photo;
+        $image->move('images/media_pembayaran', $nama_photo);
+        $photo = 'images/media_pembayaran/' . $nama_photo;
 
-        Fasilitas::create([
-            'nama' => $request->nama,
-            'foto' => $photo
+        MediaPembayaran::create([
+            'nama_bank' => $nama,
+            'no_rekening' => $no_rek,
+            'atas_nama' => $atas_nama,
+            'logo' => $photo
         ]);
-
-        return redirect('admin/fasilitas')->with('message', 'Data added Successfully');
+        return redirect('admin/media_pembayaran')->with('message', 'Data added Successfully');
     }
 
     /**
@@ -73,8 +78,8 @@ class FasilitasController extends Controller
     public function edit($id)
     {
         //
-        $data = Fasilitas::findOrFail($id);
-        return view('admin.fasilitas.edit',compact('data'));
+        $data = MediaPembayaran::findOrFail($id);
+        return view('admin.media_pembayaran.edit', compact('data'));
     }
 
     /**
@@ -87,25 +92,32 @@ class FasilitasController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $fasilitas = Fasilitas::findOrFail($id);
+        $media_pem = MediaPembayaran::findOrFail($id);
         $nama = $request->nama;
+        $atas_nama = $request->atas_nama;
+        $no_rek = $request->norek;
         $image = $request->file('image');
+
         if ($image == "") {
-            $fasilitas->update([
-                'nama' => $nama,
+            $media_pem->update([
+                'nama_bank' => $nama,
+                'no_rekening' => $no_rek,
+                'atas_nama' => $atas_nama,
             ]);
-            return redirect('admin/fasilitas')->with('message', 'Data Update Successfully');
+            return redirect('admin/media_pembayaran')->with('message', 'Data update Successfully');
         } else {
-            File::delete(public_path($fasilitas->foto));
+            File::delete(public_path($media_pem->logo));
             $nama_photo = rand() . $image->getClientOriginalName();
             $image->move('images/media_pembayaran', $nama_photo);
             $photo = 'images/media_pembayaran/' . $nama_photo;
 
-            $fasilitas->update([
-                'nama' => $request->nama,
-                'foto' => $photo
+            $media_pem->update([
+                'nama_bank' => $nama,
+                'no_rekening' => $no_rek,
+                'atas_nama' => $atas_nama,
+                'logo' => $photo
             ]);
-            return redirect('admin/fasilitas')->with('message', 'Data Update Successfully');
+            return redirect('admin/media_pembayaran')->with('message', 'Data update Successfully');
         }
     }
 
@@ -117,10 +129,11 @@ class FasilitasController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $data  = Fasilitas::findOrFail($id);
-        File::delete(public_path($data->foto));
+        $data = MediaPembayaran::findOrFail($id);
+        // if (\File::exists(public_path($data->logo))) {
+        File::delete(public_path($data->logo));
         $data->delete();
-        return redirect('admin/fasilitas')->with('message', 'Data Delete Successfully');
+        return redirect('admin/media_pembayaran')->with('message', 'Data delete Successfully');
+        // }
     }
 }
