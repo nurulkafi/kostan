@@ -14,16 +14,12 @@
                       <form>
                         <div class="input-group">
                           <a href="{{ url('admin/fasilitas/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
-                          <input type="text" class="form-control" placeholder="Search">
-                          <div class="input-group-btn">
-                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                          </div>
                         </div>
                       </form>
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
+                  <div class="card-body">
+                    <div class="table-responsive p-1">
                       <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
@@ -47,7 +43,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ url('admin/fasilitas/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
-                                        <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="far fa-edit"></i>Delete</button>
+                                        <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -61,12 +57,11 @@
             </div>
 </section>
 @include('admin.layouts.sweatalert')
-{{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
          $('#table1').DataTable();
     });
-</script> --}}
+</script>
 <script type="text/javascript">
 
      $('.show_confirm').click(function(event) {

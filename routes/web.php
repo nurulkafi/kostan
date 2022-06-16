@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\FotoKostController;
+use App\Http\Controllers\KostanController;
 use App\Http\Controllers\MediaPembayaranController;
+use App\Models\Kostan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +25,8 @@ Route::get('/', function () {
 
 Route::resource('admin/fasilitas',FasilitasController::class);
 Route::resource('admin/media_pembayaran', MediaPembayaranController::class);
+Route::resource('admin/kostan', KostanController::class);
+Route::resource('admin/foto_kostan', FotoKostController::class);
+Route::delete('admin/foto_kostan/{id_foto}/{id_kostan}',[FotoKostController::class,'destroy']);
+Route::get('province/search/{id}', [Controller::class, 'searchCity']);
+
