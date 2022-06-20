@@ -13,7 +13,7 @@ class CreateFasiltasTable extends Migration
      */
     public function up()
     {
-        Schema::create('fasiltas', function (Blueprint $table) {
+        Schema::create('fasilitas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('foto');

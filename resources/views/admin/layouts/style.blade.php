@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/components.css')}}">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 

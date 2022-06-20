@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fasilitas extends Model
+class DetailFasilitas extends Model
 {
     use HasFactory;
-    protected $table = 'fasilitas';
+    protected $table = 'detail_fasilitas';
     protected $guarded = [];
-    public function type_kamar()
+    public function fasilitas()
     {
-        return $this->belongsToMany(TypeKamar::class);
+        return $this->belongsTo(Fasilitas::class);
     }
-    
 }
