@@ -21,6 +21,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/landing', function () {
+    return view('layout.index');
+});
+
+Route::get('/masuk-pemilik', function () {
+    return view('login.login-pemilik');
+});
+
+Route::get('/masuk-pencari', function () {
+    return view('login.login-pencari');
+});
+
+Route::get('/daftar-pemilik', function () {
+    return view('login.daftar-pemilik');
+});
+
+Route::get('/daftar-pencari', function () {
+    return view('login.daftar-pencari');
+});
+
 Route::get('/', function () {
     return view('admin.layouts.master');
 });
@@ -33,4 +53,3 @@ Route::resource('admin/type_kamar', TypeKamarController::class);
 Route::delete('admin/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class,'destroy']);
 Route::delete('admin/foto_kostan/{id_foto}/{id_kostan}',[FotoKostController::class,'destroy']);
 Route::get('province/search/{id}', [Controller::class, 'searchCity']);
-
