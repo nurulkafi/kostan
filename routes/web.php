@@ -7,6 +7,8 @@ use App\Http\Controllers\FotoKostController;
 use App\Http\Controllers\KostanController;
 use App\Http\Controllers\MediaPembayaranController;
 use App\Http\Controllers\TypeKamarController;
+
+use App\Http\Controllers\LandingPageController;
 use App\Models\Kostan;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/',[LandingPageController::class,'index']);
+
 
 Route::get('/landing', function () {
     return view('layout.index');
@@ -41,7 +46,7 @@ Route::get('/daftar-pencari', function () {
     return view('login.daftar-pencari');
 });
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.layouts.master');
 });
 

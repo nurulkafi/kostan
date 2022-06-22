@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>@yield('title') :: Kosan.id</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,9 +17,10 @@
     @include('layout.nav')
     @include('layout.header')
     @include('layout.search')
-    @include('layout.main')
+    {{-- @include('layout.main')
     @include('layout.promo')
-    @include('layout.populer')
+    @include('layout.populer') --}}
+    @yield('content')
     @include('layout.footer')
 
     <!-- Bootstrap JavaScript Libraries -->
