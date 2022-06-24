@@ -3,10 +3,10 @@
 
 <div class="row login-field">
   <div class="col mt-auto">
-    <img src="{{url('images/graphics/login_p.png/')}}" width="70%" alt="">
+    <img src="{{url('images/graphics/login_p.png/')}}" width="90%" alt="">
   </div>
   <div class="col px-auto my-auto">
-    <a href="{{url('/landing')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
+    <a href="{{url('/')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Login Pemilik Kos</h3>
     <form>
       <div class="mb-3">

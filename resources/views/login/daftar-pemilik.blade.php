@@ -6,7 +6,7 @@
     <img src="{{url('images/graphics/daftar_p.png/')}}" width="90%" alt="">
   </div>
   <div class="col px-auto my-auto">
-    <a href="{{url('/landing')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
+    <a href="{{url('/')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Daftar Pemilik Kos</h3>
     <form>
       <div class="mb-3">

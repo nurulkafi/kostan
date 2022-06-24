@@ -4,6 +4,11 @@ html {
   overflow-x: hidden;
 }
 
+.mengapa {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+
 a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
@@ -119,4 +124,13 @@ footer {
   left: 0;
   width: 100%;
   text-align: center;
+}
+
+.ayam img {
+  display: block;
+}
+
+.why {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 800;
 }/*# sourceMappingURL=styles.css.map */
