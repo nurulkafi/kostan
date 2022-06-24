@@ -21,6 +21,7 @@
     @include('layout.promo')
     @include('layout.populer') --}}
     @yield('content')
+    @include('layout.mengapa')
     @include('layout.footer')
 
     <!-- Bootstrap JavaScript Libraries -->

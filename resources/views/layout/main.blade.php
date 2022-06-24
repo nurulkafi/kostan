@@ -1,6 +1,6 @@
     <!-- REKOMEN -->
     <div class="container isi mt-4">
-        <h1 class="my-5">Kost Rekomendasi</h1>
+        <h1 class="my-5 text-center">Kost Rekomendasi</h1>
         <div class="row mb-4">
 
           <div class="col ">

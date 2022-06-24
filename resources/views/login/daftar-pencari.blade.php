@@ -3,7 +3,7 @@
 
 <div class="row login-field">
   <div class="col mt-auto">
-    <img src="{{url('images/graphics/daftar_cari.png/')}}" width="90%" alt="">
+    <img src="{{url('images/graphics/daftar_c.png/')}}" width="90%" alt="">
   </div>
   <div class="col px-auto my-auto">
     <a href="{{url('/landing')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
