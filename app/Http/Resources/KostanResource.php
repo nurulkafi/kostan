@@ -31,7 +31,7 @@ class KostanResource extends JsonResource
             'deskripsi' => $this->deskripsi,
             'alamat'    => $alamat->alamat_lengkap,
             // 'harga_dari'=> $harga_dari,
-            'kabupaten' => Kabupaten::where('id', $alamat->kabupaten_id)->first(),
+            'kabupaten' => Kabupaten::where('id', $alamat->kabupaten_id)->first()->title,
             'foto_kost' => FotoKostResource::collection(FotoKost::orderBy('created_at', 'asc')->get()),
             'type_kamar'=> TypeKamarResource::collection(TypeKamar::where('kostan_id', $this->id)->orderBy('created_at', 'desc')->get()),
 
