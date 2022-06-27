@@ -50,6 +50,15 @@ Route::get('/admin', function () {
     return view('admin.layouts.master');
 });
 
+Route::get('/', function () {
+    // return view('welcome');
+    return view('layouts.home');
+});
+Route::get('/home', function () {
+    // return view('welcome');
+    return view('layouts.home');
+});
+
 Route::resource('admin/fasilitas',FasilitasController::class);
 Route::resource('admin/media_pembayaran', MediaPembayaranController::class);
 Route::resource('admin/kostan', KostanController::class);
