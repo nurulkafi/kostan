@@ -46,9 +46,10 @@ class KostanHomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $data = json_decode(json_encode(new KostanResource(Kostan::where('slug', $slug)->first())), true);
+        return $data;
     }
 
     /**
