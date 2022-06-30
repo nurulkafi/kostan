@@ -46,7 +46,7 @@
           <div class="col-md-6">
             <a href="">
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="button">Lihat area lainnya!</button>
+                <a href="{{url('/kostan')}}" class="btn btn-primary" >Lihat area lainnya!</a>
               </div>
             </a>
           </div>

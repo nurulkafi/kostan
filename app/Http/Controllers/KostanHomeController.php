@@ -16,7 +16,8 @@ class KostanHomeController extends Controller
     public function index()
     {
         $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->get())), true);
-        return $data;
+        
+        return view('semua-kos.home', compact('data'));
     }
 
     /**
