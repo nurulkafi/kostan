@@ -68,3 +68,17 @@ Route::resource('admin/type_kamar', TypeKamarController::class);
 Route::delete('admin/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class,'destroy']);
 Route::delete('admin/foto_kostan/{id_foto}/{id_kostan}',[FotoKostController::class,'destroy']);
 Route::get('province/search/{id}', [Controller::class, 'searchCity']);
+
+Route::get('/', function () {
+    return view('layouts.detail');
+});
+Route::get('/detail', function () {
+    return view('layouts.detail');
+});
+
+Route::get('/bukti-pembayaran', function () {
+    return view('layouts.bukti_pembayaran');
+});
+Route::get('/profile', function () {
+    return view('layouts.profile');
+});
