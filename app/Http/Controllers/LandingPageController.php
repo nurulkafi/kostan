@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\RekomendasiKostResource;
-use App\Models\TypeKamar;
+use App\Http\Resources\KostanResource;
+use App\Models\Kostan;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -14,9 +14,9 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $rekomendasi = json_decode(json_encode(RekomendasiKostResource::collection(TypeKamar::orderBy('created_at', 'desc')->limit(6)->get())), true);
-        // return $rekomendasi;
-        return view('landing_page.index', compact('rekomendasi'));
+        $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->limit(6)->get())), true);
+        // return $data;
+        return view('landing_page.index', compact('data'));
     }
 
     /**
