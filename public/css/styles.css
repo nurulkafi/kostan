@@ -134,3 +134,146 @@ footer {
   font-family: "Quicksand", sans-serif;
   font-weight: 800;
 }/*# sourceMappingURL=styles.css.map */
+
+.btn-sm
+{
+ color:black;
+ font-family:  "Quicksand", sans-serif;
+ font-weight: 600;
+ text-align: left;
+ margin-top: 5px ;
+ margin-bottom: 5px !important;
+ align-items: center;
+ height:30%;
+}
+.card-body p{
+   margin-top: 3px ;
+   margin-bottom: 3px !important;
+}
+.btn-p{
+ background-color: #0DBC15;
+ color: white;
+ text-align: center;
+ font-weight: 550;
+ margin-top: 5px;
+ margin-bottom: 24px;
+}
+.btn-ok{
+    background-color: #680DFD;
+    color: white;
+    margin-top: 20px;
+}
+.btn-up{
+    background-color: #680DFD;
+    color: white;
+    
+}
+
+
+body{
+    font-family: 'Quicksand';
+}
+.col-form-label{
+    font-weight: 1000;
+    font-size: 25px;
+}
+
+.card-title-m{
+    font-weight: 900;
+    font-size: 30px;
+}
+.me-md-2{
+    font-weight: 900;
+}
+.card-text{
+    font-weight: 550;
+}
+.col-md-5 h4,h5,h6{
+    font-weight: 1000;
+}
+.nav-link{
+    font-weight: 550;
+}
+.col-sm-6 h6{
+    margin-top: 18px;
+ margin-bottom: 5px;
+ 
+}
+.modal-body h4{
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+.modal-body h6{
+    font-weight: 300;
+}
+.modal-body h2{
+    font-weight: 950;
+}
+.modal-body h6 {
+    font-weight: 1000;
+}
+.modal-header h4{
+    font-weight: 900;
+}
+.btn-outline-primary{
+    text-align: left;
+    color: black;
+}
+.gap-2{
+    margin-bottom: 80px;
+   
+}
+.-p{
+    margin-top: 60px;
+   width: 70%;
+}
+.btn-g{
+    background-color: #0DBC15;
+    color:white;
+    margin-top: 30px;
+    
+}
+.btn-h{
+    background-color: #680DFD;
+    color:white;
+}
+.-u{
+    text-align: left;
+    margin-left: 40px;
+    
+}
+.head{
+    margin-top: 80px;
+    width: 50%;
+    height: 90%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-color: white;
+}
+.-f{
+    margin-top: 15px;
+    width: 50%;
+    height: 90%;
+    padding-bottom: 70px;
+    padding-top: 50px;
+}
+.u p{
+    margin-top: 30px; 
+}
+.-info{
+    float:right;
+    background-color: whitesmoke;
+    padding-left: 100px;
+    padding-right: 155px;
+    margin-left: 75%;
+    /* display:block; */
+}
+.i{
+    background-color: lightgray;
+    height:98vh;
+}
+
+
+
+
+

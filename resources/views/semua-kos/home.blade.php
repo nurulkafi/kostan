@@ -1,5 +1,5 @@
-@extends('layouts.index')
+@extends('semua-kos.index')
 @section('content')
-@include ('layouts.all_kost')
+@include ('semua-kos.all_kost')
 
 @endsection

@@ -55,7 +55,7 @@
   </head>
 
   <body >
-    @include ('layouts.menu')
+    @include ('semua-kos.menu')
 
 
     @yield('content') 

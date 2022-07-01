@@ -3,15 +3,15 @@
         <h1 class="my-5">Kost Rekomendasi</h1>
 
         <div class="row mb-4 ">
-          @forelse ($rekomendasi as $item)
+          @forelse ($data as $item)
             <div class="col-md-4 my-5">
               <div class="card mx-auto" style="width: 80%;">
-                <a href="#" class="stretched-link">
+                <a href="{{url('kostan/'.$item['slug'])}}" class="stretched-link">
                     <!-- GAMBAR KOS -->
-                  <img src="{{url($item['foto'])}}" class="card-img-top" height="200px">
+                  <img src="{{url($item['foto_kost'][0]['path'])}}" class="card-img-top" height="200px">
                 </a>
                 <div class="card-body">
-                  <h3 class="card-title mt-n6 harga">{{$item['harga']}}
+                  <h3 class="card-title mt-n6 harga">{{$item['harga_dari']}}
                   </h3>
                   <!-- NAMA ALAMAT -->
                   <h4 class="card-text mt-4">{{$item['nama']}}</h4>
@@ -46,7 +46,7 @@
           <div class="col-md-6">
             <a href="">
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="button">Lihat area lainnya!</button>
+                <a href="{{url('/kostan')}}" class="btn btn-primary" >Lihat area lainnya!</a>
               </div>
             </a>
           </div>

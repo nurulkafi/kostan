@@ -7,7 +7,7 @@ use App\Http\Controllers\FotoKostController;
 use App\Http\Controllers\KostanController;
 use App\Http\Controllers\MediaPembayaranController;
 use App\Http\Controllers\TypeKamarController;
-
+use App\Http\Controllers\KostanHomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Models\Kostan;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[LandingPageController::class,'index']);
 
+Route::resource('/kostan',KostanHomeController::class);
 
 Route::get('/landing', function () {
     return view('layout.index');
@@ -50,10 +51,10 @@ Route::get('/admin', function () {
     return view('admin.layouts.master');
 });
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('layouts.home');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return view('layouts.home');
+// });
 Route::get('/home', function () {
     // return view('welcome');
     return view('layouts.home');
@@ -67,3 +68,17 @@ Route::resource('admin/type_kamar', TypeKamarController::class);
 Route::delete('admin/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class,'destroy']);
 Route::delete('admin/foto_kostan/{id_foto}/{id_kostan}',[FotoKostController::class,'destroy']);
 Route::get('province/search/{id}', [Controller::class, 'searchCity']);
+
+Route::get('/', function () {
+    return view('layouts.detail');
+});
+Route::get('/detail', function () {
+    return view('layouts.detail');
+});
+
+Route::get('/bukti-pembayaran', function () {
+    return view('layouts.bukti_pembayaran');
+});
+Route::get('/profile', function () {
+    return view('layouts.profile');
+});

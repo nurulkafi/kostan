@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Http\Resources\KostanResource;
 use App\Models\Kostan;
-use Illuminate\Http\Request;
 
-class LandingPageController extends Controller
+class KostanHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->limit(6)->get())), true);
-        // return $data;
-        return view('landing_page.index', compact('data'));
+        $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->get())), true);
+        
+        return view('semua-kos.home', compact('data'));
     }
 
     /**
@@ -46,9 +47,10 @@ class LandingPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $data = json_decode(json_encode(new KostanResource(Kostan::where('slug', $slug)->first())), true);
+        return $data;
     }
 
     /**
