@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             // UserSeeder::class,
             KabupatenSeeder::class,
             ProvinsiSeeder::class,
+            PermissionSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

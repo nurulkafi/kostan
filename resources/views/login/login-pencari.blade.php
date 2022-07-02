@@ -8,17 +8,20 @@
   <div class="col px-auto my-auto">
     <a href="{{url('/landing')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Login Pencari Kos</h3>
-    <form>
+    <form method="POST" action="{{ route('login') }}">
+    @csrf
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
       </div>
       <div class="d-grid gap-2 col-12 mx-auto">
-        <a hreaf="" type="button" class="btn btn-success">Masuk</a>
+        <button type="submit" class="btn btn-success">
+            {{ __('Login') }}
+        </button>
       </div>
     </form>
     <small class="d-block text-center mt-3">Belum Memililiki Akun? <a href="{{url('/daftar-pencari')}}">Registrasi Disini</a></small>

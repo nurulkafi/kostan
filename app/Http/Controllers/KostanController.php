@@ -6,6 +6,7 @@ use App\Models\AlamatKost;
 use App\Models\FotoKost;
 use App\Models\Kabupaten;
 use App\Models\Kostan;
+use App\Models\PemilikKost;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,7 +22,13 @@ class KostanController extends Controller
     public function index()
     {
         //
-        $data = Kostan::latest()->get();
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id',$user->id)->first();
+        if ($user->hasRole("admin|staff")) {
+            $data = Kostan::latest()->get();
+        }  else {
+            $data = Kostan::where('pemilik_kost_id',$pemilik_kost->id)->get();
+        }
         return view('admin.kostan.index',compact('data'));
     }
 
@@ -45,9 +52,11 @@ class KostanController extends Controller
      */
     public function store(Request $request)
     {
-
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id',$user->id)->first();
         $kostan = Kostan::create([
             'nama' => $request->nama,
+            'pemilik_kost_id' => $pemilik_kost->id,
             'slug' => Str::slug($request->nama),
             'gender' => $request->gender,
             'deskripsi' => $request->deskripsi
