@@ -11,7 +11,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ url('admin/foto_kostan/'.$data->id) }}" method="POST" enctype="multipart/form-data">
+      @if (Auth::user()->hasRole('admin|staff'))
+        <form action="{{ url('admin/foto_kostan/'.$data->id) }}" method="post" enctype="multipart/form-data">
+        @else
+        <form action="{{ url('pemilik_kost/foto_kostan/'.$data->id) }}" method="post" enctype="multipart/form-data">
+        @endif
         @csrf
         @method("PUT")
       <div class="modal-body">
@@ -39,7 +43,11 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body p-0">
+            @if (Auth::user()->hasRole('admin|staff'))
             <form action="{{ url('admin/kostan/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @else
+            <form action="{{ url('pemilik_kost/kostan/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @endif
             @csrf
             @method("PUT")
             <div class="p-4">
@@ -120,11 +128,20 @@
                                             <td>{{ $no++ }}</td>
                                             <td><img src="{{ asset($item->path) }}" width="150px" height="150px" alt="" class="img-thumbnail"></td>
                                             <td>
+                                                @if (Auth::user()->hasRole('admin|staff'))
                                                 <form method="POST"  action="{{ url('admin/foto_kostan/'.$item->id.'/'.$data->id) }}" id="hapus_foto">
                                                 @csrf
                                                 @method("delete")
                                                 <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
                                                 </form>
+                                                @else
+                                                <form method="POST"  action="{{ url('pemilik_kost/foto_kostan/'.$item->id.'/'.$data->id) }}" id="hapus_foto">
+                                                @csrf
+                                                @method("delete")
+                                                <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
+                                                </form>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -202,7 +219,6 @@
             if (result.isConfirmed) {
                 form.submit();
                 $("#hapus_foto").closest("form").submit()
-                console.log($("#hapus_foto").closest("form").submit());
             }
         })
       });

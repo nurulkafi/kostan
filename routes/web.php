@@ -63,25 +63,39 @@ Route::get('/home', function () {
     // return view('welcome');
     return view('layouts.home');
 });
-
-Route::resource('admin/fasilitas',FasilitasController::class);
-Route::resource('admin/media_pembayaran', MediaPembayaranController::class);
-Route::resource('admin/kostan', KostanController::class);
-Route::resource('admin/foto_kostan', FotoKostController::class);
-Route::resource('admin/type_kamar', TypeKamarController::class);
-Route::resource('admin/users', UsersController::class);
-Route::resource('admin/role', RoleController::class);
-Route::resource('admin/permission', PermisssionController::class);
-Route::delete('admin/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class,'destroy']);
-Route::delete('admin/foto_kostan/{id_foto}/{id_kostan}',[FotoKostController::class,'destroy']);
+//admin staff
+Route::group(['middleware' => ['role:admin|staff']],
+    function () {
+    Route::prefix('/admin')->group(
+        function () {
+            Route::resource('/fasilitas', FasilitasController::class);
+            Route::resource('/media_pembayaran', MediaPembayaranController::class);
+            Route::resource('/kostan', KostanController::class);
+            Route::resource('/foto_kostan', FotoKostController::class);
+            Route::resource('/type_kamar', TypeKamarController::class);
+            Route::resource('/users', UsersController::class);
+            Route::resource('/role', RoleController::class);
+            Route::resource('/permission', PermisssionController::class);
+            Route::delete('/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class, 'destroy']);
+            Route::delete('/foto_kostan/{id_foto}/{id_kostan}', [FotoKostController::class, 'destroy']);
+    });
+});
 //pemilik kost
-Route::resource('pemilik_kost/fasilitas', FasilitasController::class);
-Route::resource('pemilik_kost/media_pembayaran', MediaPembayaranController::class);
-Route::resource('pemilik_kost/kostan', KostanController::class);
-Route::resource('pemilik_kost/foto_kostan', FotoKostController::class);
-Route::resource('pemilik_kost/type_kamar', TypeKamarController::class);
-Route::delete('pemilik_kost/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class, 'destroy']);
-Route::delete('pemilik_kost/foto_kostan/{id_foto}/{id_kostan}', [FotoKostController::class, 'destroy']);
+Route::group(
+    ['middleware' => ['role:pemilik-kost']],
+    function () {
+        Route::prefix('/pemilik_kost')->group(
+            function () {
+            Route::resource('/fasilitas', FasilitasController::class);
+            Route::resource('/media_pembayaran', MediaPembayaranController::class);
+            Route::resource('/kostan', KostanController::class);
+            Route::resource('/foto_kostan', FotoKostController::class);
+            Route::resource('/type_kamar', TypeKamarController::class);
+            Route::delete('/detail_fasilitas/{id_fasilitas}/{id_tipe_kamar}', [DetailFasilitasController::class, 'destroy']);
+            Route::delete('/foto_kostan/{id_foto}/{id_kostan}', [FotoKostController::class, 'destroy']);
+        });
+});
+
 Route::get('province/search/{id}', [Controller::class, 'searchCity']);
 
 // Route::get('/', function () {

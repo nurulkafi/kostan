@@ -15,13 +15,14 @@ class CreateKostanTable extends Migration
     {
         Schema::create('kostan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pemilik_kost_id')->nullable();
+            $table->unsignedBigInteger('pemilik_kost_id');
             $table->string('nama');
             $table->string('gender');
             $table->string('slug')->unique();
             $table->text('deskripsi');
             $table->timestamps();
 
+            $table->foreign('pemilik_kost_id')->references('id')->on('pemilik_kost');
         });
     }
 

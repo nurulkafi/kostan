@@ -13,7 +13,11 @@
                     <div class="card-header-form">
                       <form>
                         <div class="input-group">
+                          @if (Auth::user()->hasRole('admin|staff'))
                           <a href="{{ url('admin/fasilitas/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                          @else
+                          <a href="{{ url('pemilik_kost/fasilitas/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                          @endif
                         </div>
                       </form>
                     </div>
@@ -39,12 +43,21 @@
                                     <td>{{ $item->nama }}</td>
                                     <td><img width="200" height="200" src="{{ asset($item->foto) }}" class="img-thumbnail" alt=""></td>
                                     <td>
+                                        @if (Auth::user()->hasRole('admin|staff'))
                                         <form method="POST" action="{{ url('admin/fasilitas/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ url('admin/fasilitas/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
                                         <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
                                         </form>
+                                        @else
+                                        <form method="POST" action="{{ url('pemilik_kost/fasilitas/'.$item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ url('pemilik_kost/fasilitas/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
+                                        <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
+                                        </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

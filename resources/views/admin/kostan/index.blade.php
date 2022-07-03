@@ -13,7 +13,11 @@
                     <div class="card-header-form">
                       <form>
                         <div class="input-group">
-                          <a href="{{ url('admin/kostan/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            @if (Auth::user()->hasRole('admin|staff'))
+                            <a href="{{ url('admin/kostan/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            @else
+                            <a href="{{ url('pemilik_kost/kostan/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            @endif
                         </div>
                       </form>
                     </div>
@@ -41,13 +45,23 @@
                                 <td>{{ $item->gender }}</td>
                                 <td>{{ $item->alamat->alamat_lengkap }}</td>
                                 <td>
+                                        @if (Auth::user()->hasRole('admin|staff'))
                                         <form method="POST" action="{{ url('admin/kostan/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ url('admin/kostan/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
                                         <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
                                         </form>
-                                    </td>
+                                        @else
+                                        <form method="POST" action="{{ url('pemilik_kost/kostan/'.$item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ url('pemilik_kost/kostan/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
+                                        <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
+                                        </form>
+                                        @endif
+
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
