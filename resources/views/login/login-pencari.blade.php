@@ -6,7 +6,7 @@
     <img src="{{url('images/graphics/login_c.png/')}}" width="95%" alt="">
   </div>
   <div class="col px-auto my-auto">
-    <a href="{{url('/landing')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
+    <a href="{{url('/')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Login Pencari Kos</h3>
     <form method="POST" action="{{ route('login') }}">
     @csrf
