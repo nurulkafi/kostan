@@ -5,7 +5,7 @@
     <div class="card mb-3" style="max-width: 638px; height:350px; ">
         <div class="row g-0">
           <div class="col-md-7">
-            <img src="{{url('images/kos2.jpg')}}" class="img-fluid rounded-start" style="height:300px;" alt="...">
+            <img src="{{asset('images/kos/2.png')}}" class="img-fluid rounded-start" style="height:300px;" alt="...">
           </div>
           <div class="col-md-5">
             <div class="card-body">
