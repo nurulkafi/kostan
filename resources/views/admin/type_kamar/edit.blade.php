@@ -11,7 +11,12 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body p-0">
-            <form action="{{ url('admin/type_kamar/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @if (Auth::user()->hasRole('admin|staff'))
+           <form action="{{ url('admin/type_kamar/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @else
+            <form action="{{ url('pemilik_kost/type_kamar/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @endif
+
             @csrf
             @method('PUT')
             <div class="p-4">

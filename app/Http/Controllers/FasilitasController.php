@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
+use App\Models\PemilikKost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use File;
@@ -17,7 +18,13 @@ class FasilitasController extends Controller
     public function index()
     {
         //
-        $data = Fasilitas::get();
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        if ($user->hasRole("admin|staff")) {
+            $data = Fasilitas::latest()->get();
+        } else {
+            $data = Fasilitas::where('pemilik_kost_id', $pemilik_kost->id)->get();
+        }
         return view('admin.fasilitas.index',compact('data'));
     }
 
@@ -40,6 +47,8 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
         $image = $request->file('image');
         $nama_photo = rand() . $image->getClientOriginalName();
         $image->move('images/fasilitas', $nama_photo);
@@ -47,10 +56,16 @@ class FasilitasController extends Controller
 
         Fasilitas::create([
             'nama' => $request->nama,
-            'foto' => $photo
+            'foto' => $photo,
+            'pemilik_kost_id' => $pemilik_kost->id
         ]);
 
-        return redirect('admin/fasilitas')->with('message', 'Data added Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/fasilitas')->with('message', 'Data added Successfully');
+        }else{
+            return redirect('pemilik_kost/fasilitas')->with('message', 'Data added Successfully');
+        }
     }
 
     /**
@@ -94,7 +109,12 @@ class FasilitasController extends Controller
             $fasilitas->update([
                 'nama' => $nama,
             ]);
-            return redirect('admin/fasilitas')->with('message', 'Data Update Successfully');
+            if (\Auth::user()->hasRole('admin|staff')) {
+                # code...
+                return redirect('admin/fasilitas')->with('message', 'Data update Successfully');
+            } else {
+                return redirect('pemilik_kost/fasilitas')->with('message', 'Data update Successfully');
+            }
         } else {
             File::delete(public_path($fasilitas->foto));
             $nama_photo = rand() . $image->getClientOriginalName();
@@ -105,7 +125,12 @@ class FasilitasController extends Controller
                 'nama' => $request->nama,
                 'foto' => $photo
             ]);
-            return redirect('admin/fasilitas')->with('message', 'Data Update Successfully');
+            if (\Auth::user()->hasRole('admin|staff')) {
+                # code...
+                return redirect('admin/fasilitas')->with('message', 'Data update Successfully');
+            } else {
+                return redirect('pemilik_kost/fasilitas')->with('message', 'Data update Successfully');
+            }
         }
     }
 
@@ -121,6 +146,11 @@ class FasilitasController extends Controller
         $data  = Fasilitas::findOrFail($id);
         File::delete(public_path($data->foto));
         $data->delete();
-        return redirect('admin/fasilitas')->with('message', 'Data Delete Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/fasilitas')->with('message', 'Data delete Successfully');
+        } else {
+            return redirect('pemilik_kost/fasilitas')->with('message', 'Data delete Successfully');
+        }
     }
 }

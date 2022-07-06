@@ -6,6 +6,7 @@ use App\Models\DetailFasilitas;
 use App\Models\Kostan;
 use App\Models\TypeKamar;
 use App\Models\Fasilitas;
+use App\Models\PemilikKost;
 use Illuminate\Http\Request;
 
 class TypeKamarController extends Controller
@@ -18,7 +19,13 @@ class TypeKamarController extends Controller
     public function index()
     {
         //
-        $data = TypeKamar::latest()->get();
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        if (!$user->hasRole("admin|staff")) {
+            $data = TypeKamar::join('kostan', 'kostan_id', '=', 'kostan.id')->where('pemilik_kost_id', $pemilik_kost->id)->get();
+        }else{
+            $data = TypeKamar::get();
+        }
         return view('admin.type_kamar.index',compact('data'));
     }
 
@@ -30,8 +37,10 @@ class TypeKamarController extends Controller
     public function create()
     {
         //
-        $kostan = Kostan::get();
-        $fasilitas = Fasilitas::get();
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        $kostan = Kostan::where('pemilik_kost_id',$pemilik_kost->id)->get();
+        $fasilitas = Fasilitas::where('pemilik_kost_id', $pemilik_kost->id)->get();
         return view('admin.type_kamar.create',compact('kostan','fasilitas'));
     }
 
@@ -68,7 +77,13 @@ class TypeKamarController extends Controller
                 ]);
             }
         }
-        return redirect('admin/type_kamar')->with('message', 'Data Add Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/type_kamar')->with('message', 'Data Add Successfully');
+        } else {
+            return redirect('pemilik_kost/pemilik_kost')->with('message', 'Data Add Successfully');
+        }
+
     }
 
     /**
@@ -134,7 +149,12 @@ class TypeKamarController extends Controller
                 }
             }
         }
-        return redirect('admin/type_kamar')->with('message', 'Data update Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/type_kamar')->with('message', 'Data Update Successfully');
+        } else {
+            return redirect('pemilik_kost/type_kamar')->with('message', 'Data Update Successfully');
+        }
     }
 
     /**
@@ -147,6 +167,11 @@ class TypeKamarController extends Controller
     {
         $tipe_kamar = TypeKamar::findOrFail($id);
         $tipe_kamar->delete();
-        return redirect('admin/type_kamar')->with('message', 'Data Delete Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/type_kamar')->with('message', 'Data Delete Successfully');
+        } else {
+            return redirect('pemilik_kost/type_kamar')->with('message', 'Data Delete Successfully');
+        }
     }
 }

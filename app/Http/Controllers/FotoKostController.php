@@ -78,7 +78,13 @@ class FotoKostController extends Controller
             'path' => $photo,
             'kostan_id' => $id
         ]);
-        return redirect('admin/kostan/' . $id . '/edit')->with('message', 'Photo Add Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/kostan/' . $id . '/edit')->with('message', 'Add Photo Successfully');
+        } else {
+            return redirect('pemilik_kost/kostan/' . $id . '/edit')->with('message', 'Add Photo Successfully');
+        }
+
     }
 
     /**
@@ -92,6 +98,11 @@ class FotoKostController extends Controller
         $foto = FotoKost::findOrFail($id_foto);
         File::delete(public_path($foto->path));
         $foto->delete();
-        return redirect('admin/kostan/'.$id_kostan.'/edit')->with('message', 'Photo delete Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/kostan/' . $id_kostan . '/edit')->with('message', 'Delete Photo Successfully');
+        } else {
+            return redirect('pemilik_kost/kostan/' . $id_kostan . '/edit')->with('message', 'Delete Photo Successfully');
+        }
     }
 }
