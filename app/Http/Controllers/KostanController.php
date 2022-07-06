@@ -78,7 +78,12 @@ class KostanController extends Controller
                 ]);
             }
         }
-        return redirect('admin/kostan')->with('message', 'Data added Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/kostan')->with('message', 'Data added Successfully');
+        } else {
+            return redirect('pemilik_kost/kostan')->with('message', 'Data added Successfully');
+        }
     }
     /**
      * Display the specified resource.
@@ -130,7 +135,12 @@ class KostanController extends Controller
                 'kabupaten_id' => $request->kabupaten_id
             ]);
         }
-        return redirect('admin/kostan')->with('message', 'Data Update Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/kostan')->with('message', 'Data Update Successfully');
+        } else {
+            return redirect('pemilik_kost/kostan')->with('message', 'Data Update Successfully');
+        }
     }
 
     /**
@@ -148,7 +158,12 @@ class KostanController extends Controller
             File::delete(public_path($value->path));
         }
         $data->delete();
-        return redirect('admin/kostan')->with('message', 'Data delete Successfully');
+        if (\Auth::user()->hasRole('admin|staff')) {
+            # code...
+            return redirect('admin/kostan')->with('message', 'Data Delete Successfully');
+        } else {
+            return redirect('pemilik_kost/kostan')->with('message', 'Data Delete Successfully');
+        }
     }
 
 }

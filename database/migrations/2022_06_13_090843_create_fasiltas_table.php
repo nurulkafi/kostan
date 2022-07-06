@@ -15,9 +15,11 @@ class CreateFasiltasTable extends Migration
     {
         Schema::create('fasilitas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pemilik_kost_id');
             $table->string('nama');
             $table->string('foto');
             $table->timestamps();
+            $table->foreign('pemilik_kost_id')->references('id')->on('pemilik_kost');
         });
     }
 

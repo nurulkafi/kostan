@@ -9,7 +9,11 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body p-0">
+            @if (Auth::user()->hasRole('admin|staff'))
             <form action="{{ url('admin/fasilitas/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @else
+            <form action="{{ url('pemilik_kost/fasilitas/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            @endif
             @csrf
             @method("PUT")
             <div class="p-4">

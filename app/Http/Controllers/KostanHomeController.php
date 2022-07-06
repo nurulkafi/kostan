@@ -50,7 +50,10 @@ class KostanHomeController extends Controller
     public function show($slug)
     {
         $data = json_decode(json_encode(new KostanResource(Kostan::where('slug', $slug)->first())), true);
-        return $data;
+        // return $data;
+
+        return view('semua-kos.detail', compact('data'));
+
     }
 
     /**
