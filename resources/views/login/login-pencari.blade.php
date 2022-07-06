@@ -6,7 +6,6 @@
     <img src="{{url('images/graphics/login_c.png/')}}" width="95%" alt="">
   </div>
   <div class="col px-auto my-auto">
-    <a href="{{url('/')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Login Pencari Kos</h3>
     <form method="POST" action="{{ route('login') }}">
     @csrf
@@ -25,6 +24,10 @@
       </div>
     </form>
     <small class="d-block text-center mt-3">Belum Memililiki Akun? <a href="{{url('/daftar-pencari')}}">Registrasi Disini</a></small>
+
+    <button type="button" class="btn btn-danger mt-5">
+      <a href="{{url('/')}}" class="text-white " style="text-decoration: none">kembali</a>
+    </button>
   </div>
 </div>
 
