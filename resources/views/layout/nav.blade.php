@@ -26,7 +26,7 @@
                      </a>
                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                          <li>
-                             <a class="dropdown-item" href="#">
+                             <a class="dropdown-item" href="{{url('/profile')}}">
                                <img src="{{url('images/graphics/profile.png')}}" height="20px" /> Profil
                              </a>
                          </li>

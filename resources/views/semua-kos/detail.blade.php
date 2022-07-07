@@ -3,65 +3,7 @@
 @section('title', $data['nama'])
 
 @section('content') 
-<!-- NAVBAR -->
-<nav class="navbar ">
-<div class="container">
-	<a class="navbar-brand" href="#"><img src="{{asset('images/logo.png')}}" alt="" width="150" height="70" class="d-inline-block align-text-top"></a>
-	<nav class="navbar navbar-expand-lg ">
-	<span class="navbar-text">
-	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		<li class="nav-item">
-			<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#daftar">Daftar</a>
-			<!-- Modal -->
-			<div class="modal fade" id="daftar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<button type="button" class="btn-close ms-4 mt-4" data-bs-dismiss="modal" aria-label="Close"></button>
-						<h5 class="modal-title text-center">Mau daftar sebagai apa?</h5>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col text-center">
-									<h3>Pemilik Kos</h3>
-									<a href="#"><img src="{{asset('images/pemilik.png')}}"></a>
-								</div>
-								<div class="col text-center">
-									<h3>Pencari Kos</h3>
-									<a href="#"><img src="{{asset('images/cari.png')}}"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#masuk">Masuk</a>
-				<!-- Modal -->
-				<div class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-					<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<button type="button" class="btn-close ms-4 mt-4" data-bs-dismiss="modal" aria-label="Close"></button>
-							<h5 class="modal-title text-center">Mau Masuk sebagai apa?</h5>
-							<div class="modal-body">
-								<div class="row">
-									<div class="col text-center">
-										<h3>Pemilik Kos</h3>
-										<a href="#"><img src="{{asset('images/pemilik.png')}}"></a>
-									</div>
-									<div class="col text-center">
-										<h3>Pencari Kos</h3>
-										<a href="#"><img src="{{asset('images/cari.png')}}"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				</span>
-			</div>
-			</nav>
-		</div>
-		<!-- END NAVBAR -->
-		 {{-- corousel --}}
+		{{-- corousel --}}
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -110,10 +52,12 @@
 					Harga Mulai <br/><b>{{$data['harga_dari']}} / Bulan </b>
 					</button>
                     
-                    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
-                    Kamar Pilihanmu
-                    <h2>Booking Kamar</h2>
-                    </a>
+					@auth
+						<a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
+						Kamar Pilihanmu
+						<h2>Booking Kamar</h2>
+						</a>
+					@endauth
                 </div>
 			</div>
 		</div>

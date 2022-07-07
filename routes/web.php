@@ -9,6 +9,7 @@ use App\Http\Controllers\MediaPembayaranController;
 use App\Http\Controllers\TypeKamarController;
 use App\Http\Controllers\KostanHomeController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermisssionController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\UsersController;
@@ -30,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[LandingPageController::class,'index']);
 
 Route::resource('/kostan',KostanHomeController::class);
+
+Route::resource('/profile',ProfileController::class);
 
 Route::get('/landing', function () {
     return view('layout.index');
@@ -108,9 +111,7 @@ Route::get('/detail', function () {
 Route::get('/bukti-pembayaran', function () {
     return view('layouts.bukti_pembayaran');
 });
-Route::get('/profile', function () {
-    return view('layouts.profile');
-});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
