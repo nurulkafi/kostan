@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-md-9 my-auto">
                             <div class="input-group my-auto ">
-                                <input type="text" name="keyword" class="form-control" placeholder="Ketik Lokasi atau Nama Kos">
+                                <input type="text" name="keyword" class="form-control" placeholder="Ketik Nama Kos">
                             </div>
                         </div>
                         <div class="col-md-2 my-auto">
