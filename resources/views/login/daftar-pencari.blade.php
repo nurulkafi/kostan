@@ -6,7 +6,6 @@
     <img src="{{url('images/graphics/daftar_p.png/')}}" width="90%" alt="">
   </div>
   <div class="col px-auto my-auto">
-    <a href="{{url('/')}}" class="text-muted " style="text-decoration: none">&lt;kembali</a>
     <h3 class="judul text-center">Daftar Pemilik Kos</h3>
     @if ($errors->any())
     <div class="alert alert-danger text-white" role="alert">
@@ -49,6 +48,10 @@
         </div>
     </form>
     <small class="d-block text-center mt-3">Sudah memiliki akun? <a href="{{url('/masuk-pemilik')}}">login</a></small>
+
+    <button type="button" class="btn btn-danger mt-5">
+      <a href="{{url('/')}}" class="text-white " style="text-decoration: none">kembali</a>
+    </button>
   </div>
 </div>
 
