@@ -65,33 +65,42 @@
 	  </div>
 	</nav>
 <div class="container">
-	<div class="row row-cols-1 row-cols-md-3 g-4">
-    @forelse ($data as $item)
-	<div class="col-md-4">
-		<a href="{{url('kostan/'.$item['slug'])}}">
-			<div class="card bg-dark text-white">
-				<img src="{{url($item['foto_kost'][0]['path'])}}" class="card-img" alt="...">
-				</span>
-				<div class="card-img-overlay">
-					<img src="{{url('img/logo.png')}}" alt="" width="70" height="25" class="d-inline-block align-text-top bg-light">
-					<br>
-					<br>
-					<br>
-					<b>
-					<h5>{{$item['nama']}}</h5>
-					</b>
-					<h6>{{$item['alamat']}} ,{{$item['kabupaten']}} 
-            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-            <button type="button" class="btn btn-success" style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Ada Kosong</button></h6>
-			<button type="button" class="btn btn-primary btn-sn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .58rem; width:24%; height:15%; color:white">Kost {{$item['gender']}} &nbsp;
-            <br/>
+	<div class="row mb-4 ">
+		@forelse ($data as $item)
+			<div class="col-md-4 my-5">
+			<div class="card mx-auto" style="width: 80%;">
+				<a href="{{url('kostan/'.$item['slug'])}}" class="stretched-link">
+					<!-- GAMBAR KOS -->
+				<img src="{{url($item['foto_kost'][0]['path'])}}" class="card-img-top" height="200px">
+				</a>
+				<div class="card-body">
+				<h3 class="card-title mt-n6 harga">{{$item['harga_dari']}}
+				</h3>
+				<!-- NAMA ALAMAT -->
+				<h4 class="card-text mt-4">{{$item['nama']}}</h4>
+				<h5>{{$item['kabupaten']}}</h5>
+				<small>{{$item['alamat']}}</small>
+				</div>
+
+				<!-- DETAIL KOS -->
+				<div class="container">
+					<div class="row mb-3 px-3 ">
+					<div class="col text-start my-auto">
+						<img src="{{url('images/icons/bi_people-fill.png')}}" height="25px">
+						<h5>Kost {{$item['gender']}}</h5>
+					</div>
+					<div class="col text-end my-auto">
+						<img src="{{url('images/icons/Group 7.png')}}" height="30px">
+						<h5>Kost</h5>
+					</div>
+					</div>
+
 				</div>
 			</div>
-		</a>
-	</div>
-    @empty
-    	<h3>Kost TIdak Tersedia</h3>
-    @endforelse
+			</div>
+		@empty
+			<h3>Kost Tidak Ada</h3>
+		@endforelse
 	</div>
 </div>
 <br/>

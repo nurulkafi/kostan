@@ -4,7 +4,9 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <img src="{{url('images/Logo.png')}}" alt="" height="60" class="navbar-brand my-auto">
+                <a href="{{url('/')}}">
+                  <img src="{{url('images/Logo.png')}}" alt="" height="60" class="navbar-brand my-auto">
+                </a>
               </div>
               <div class="col-6">
                 </div>

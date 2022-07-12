@@ -13,7 +13,7 @@ class KostanHomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->get())), true);
         
@@ -88,5 +88,13 @@ class KostanHomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $data = json_decode(json_encode(KostanResource::collection(Kostan::where('nama', 'LIKE', "%{$request->keyword}%")->orderBy('created_at', 'desc')->get())), true);
+        
+        return view('semua-kos.home', compact('data'));
+
     }
 }

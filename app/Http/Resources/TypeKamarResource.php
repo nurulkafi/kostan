@@ -17,6 +17,7 @@ class TypeKamarResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'            => $this->id,
             'nama'          => $this->nama,
             'ukuran_kamar'  => $this->ukuran_kamar,
             'peraturan'     => $this->peraturan,

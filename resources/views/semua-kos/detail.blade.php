@@ -11,9 +11,6 @@
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				{{-- <div class="carousel-item active" style="display: none">
-					<img src="{{asset('images/kos/1.png')}}" class="d-block w-100" height="500" alt="...">
-				</div> --}}
                 @foreach ($data['foto_kost'] as $item)
 				<div class="carousel-item active">
                     <img src="{{asset($item['path'])}}" class="d-block w-100" height="500" alt="...">
@@ -52,12 +49,12 @@
 					Harga Mulai <br/><b>{{$data['harga_dari']}} / Bulan </b>
 					</button>
                     
-					@auth
+					{{-- @auth
 						<a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
 						Kamar Pilihanmu
 						<h2>Booking Kamar</h2>
 						</a>
-					@endauth
+					@endauth --}}
                 </div>
 			</div>
 		</div>

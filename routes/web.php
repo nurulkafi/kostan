@@ -32,6 +32,8 @@ Route::get('/',[LandingPageController::class,'index']);
 
 Route::resource('/kostan',KostanHomeController::class);
 
+Route::get('/search',[KostanHomeController::class, 'search']);
+
 Route::resource('/profile',ProfileController::class);
 
 Route::get('/landing', function () {
