@@ -1,23 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Penyewa;
 use Illuminate\Http\Request;
-use App\Http\Resources\KostanResource;
-use App\Models\Kostan;
+use Illuminate\Support\Facades\Auth;
 
-class KostanHomeController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data = json_decode(json_encode(KostanResource::collection(Kostan::orderBy('created_at', 'desc')->get())), true);
-        
-        return view('semua-kos.home', compact('data'));
+        // $data = Penyewa::where('users_id', Auth::user()->id)->first();
+
+        return view('profile.index', compact('data'));
     }
 
     /**
@@ -47,13 +46,9 @@ class KostanHomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $data = json_decode(json_encode(new KostanResource(Kostan::where('slug', $slug)->first())), true);
-        // return $data;
-
-        return view('semua-kos.detail', compact('data'));
-
+        //
     }
 
     /**
@@ -88,13 +83,5 @@ class KostanHomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request)
-    {
-        $data = json_decode(json_encode(KostanResource::collection(Kostan::where('nama', 'LIKE', "%{$request->keyword}%")->orderBy('created_at', 'desc')->get())), true);
-        
-        return view('semua-kos.home', compact('data'));
-
     }
 }

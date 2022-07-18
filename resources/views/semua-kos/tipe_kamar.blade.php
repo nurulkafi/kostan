@@ -25,7 +25,7 @@
 							<div class="col-md-5">
 								<div class="card-body">
 									<h4 class="card-title">{{$item['nama']}}</h4>
-									<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#peraturan" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;width:65%; height:10%;"><i class="bi bi-exclamation-triangle-fill"></i> Peraturan Kost</button>
+									<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#peraturan-{{$item['id']}}" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;width:65%; height:10%;"><i class="bi bi-exclamation-triangle-fill"></i> Peraturan Kost</button>
 									<p class="card-text">
 										&nbsp;<i class="bi bi-aspect-ratio-fill"></i> Ukuran : {{$item['ukuran_kamar']}}
 									</p>
@@ -38,15 +38,15 @@
 									<br/>
 									<h5 class="card-title">Fasilitas Kamar</h5>
 									<div class="row">
-                    @foreach ($item['fasilitas'] as $fasilitas)
-                      <div class="col">
-                        <i class="bi bi-box2-fill"></i>{{$fasilitas['nama']}}
-                      </div>
-                    @endforeach
+									@foreach ($item['fasilitas'] as $fasilitas)
+									<div class="col">
+										<i class="bi bi-box2-fill"></i>{{$fasilitas['nama']}}
 									</div>
-								</div>
-								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-									<button class="btn btn-outline-primary me-md-2" type="button">Pilih Kamar</button>
+									@endforeach
+									</div>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+										<button class="btn btn-outline-primary me-md-2" type="button">Pilih Kamar</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -56,9 +56,7 @@
 		</div>
 		<br/>
 
-    @endforeach
-
-		<div class="modal fade" id="peraturan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="peraturan-{{$item['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -68,19 +66,12 @@
 					</div>
 					<div class="modal-body">
 						<p class="card-text">
-							 &nbsp;<i class="bi bi-house-heart-fill"></i> Tipe ini bisa diisi maks. 2 orang/ kamar
-						</p>
-						<p class="card-text">
-							 &nbsp;<i class="bi bi-gender-male"></i> Kosan ini khusus Putra
-						</p>
-						<p class="card-text">
-							 &nbsp;<i class="bi bi-exclamation-octagon-fill"></i> Tidak untuk pasutri
-						</p>
-						<p class="card-text">
-							 &nbsp;<i class="bi bi-file-break-fill"></i> Tidak boleh pulang lewat dari jam 10 malam
+							{!! $item['peraturan'] !!}
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
+    @endforeach
+
 	</div>

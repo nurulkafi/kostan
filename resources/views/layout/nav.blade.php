@@ -4,7 +4,9 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <img src="{{url('images/Logo.png')}}" alt="" height="60" class="navbar-brand my-auto">
+                <a href="{{url('/')}}">
+                  <img src="{{url('images/Logo.png')}}" alt="" height="60" class="navbar-brand my-auto">
+                </a>
               </div>
               <div class="col-6">
                 </div>
@@ -26,7 +28,7 @@
                      </a>
                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                          <li>
-                             <a class="dropdown-item" href="#">
+                             <a class="dropdown-item" href="{{url('/profile')}}">
                                <img src="{{url('images/graphics/profile.png')}}" height="20px" /> Profil
                              </a>
                          </li>
