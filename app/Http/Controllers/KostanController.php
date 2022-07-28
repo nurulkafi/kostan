@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KostanExport;
 use App\Models\AlamatKost;
 use App\Models\FotoKost;
 use App\Models\Kabupaten;
@@ -11,6 +12,8 @@ use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use File;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KostanController extends Controller
 {
@@ -52,6 +55,22 @@ class KostanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'nama' => ['required', 'unique:kostan'],
+                'gender' => ['required'],
+                'deskripsi' => ['required'],
+                'kabupaten_id' => ['required'],
+            ],
+            [
+                'nama.required' => 'Nama Kostan Wajib Diisi..',
+                'nama.unique' => 'Nama Kostan Sudah Digunakan..',
+                'gender.required' => 'Gender Wajib Diisi..',
+                'alamat.required' => 'Alamat Wajib Diisi..',
+                'kabupaten_id' => 'Kota / Kabupaten Wajib Diisi..',
+            ]
+
+        );
         $user = \Auth::user();
         $pemilik_kost = PemilikKost::where('users_id',$user->id)->first();
         $kostan = Kostan::create([
@@ -93,7 +112,14 @@ class KostanController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id',$user->id)->first();
+        if ($user->hasRole("admin|staff")) {
+            $data = Kostan::where('id', $id)->first();
+        } else {
+            $data = Kostan::where('pemilik_kost_id', $pemilik_kost->id)->where('id',$id)->first();
+        }
+        return view('admin.kostan.detail', compact('data'));
     }
 
     /**
@@ -105,6 +131,7 @@ class KostanController extends Controller
     public function edit($id)
     {
         //
+
         $data = Kostan::findOrFail($id);
         $provinsi = Provinsi::get();
         $kota = Kabupaten::where('provinsi_id',$data->alamat->kabupaten->provinsi_id)->get();
@@ -121,6 +148,22 @@ class KostanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $request->validate(
+        //     [
+        //         'nama' => ['required', 'unique:kostan'],
+        //         'gender' => ['required'],
+        //         'deskripsi' => ['required'],
+        //         'kabupaten_id' => ['required'],
+        //     ],
+        //     [
+        //         'nama.required' => 'Nama Kostan Wajib Diisi..',
+        //         'nama.unique' => 'Nama Kostan Sudah Digunakan..',
+        //         'gender.required' => 'Gender Wajib Diisi..',
+        //         'alamat.required' => 'Alamat Wajib Diisi..',
+        //         'kabupaten_id' => 'Kota / Kabupaten Wajib Diisi..',
+        //     ]
+
+        // );
         $kostan = Kostan::findOrFail($id);
         $kostan = $kostan->update([
             'nama' => $request->nama,
@@ -165,5 +208,20 @@ class KostanController extends Controller
             return redirect('pemilik_kost/kostan')->with('message', 'Data Delete Successfully');
         }
     }
-
+    public function pdf(){
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        if ($user->hasRole("admin|staff")) {
+            $data = Kostan::latest()->get();
+        } else {
+            $data = Kostan::where('pemilik_kost_id', $pemilik_kost->id)->get();
+        }
+        $pdf = PDF::loadView('admin.kostan.pdf', ['data' => $data]);
+        return $pdf->setPaper('a4', 'landscape')->setWarnings(false)->download('data_kostan_'.date('d-m-Y').'_.pdf');
+        // return view('admin.kostan.pdf', compact('data'));
+    }
+    public function excel()
+    {
+        return Excel::download(new KostanExport, 'kostan.xlsx');
+    }
 }

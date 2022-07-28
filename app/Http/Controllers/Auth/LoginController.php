@@ -30,9 +30,9 @@ class LoginController extends Controller
     {
         $user = \Auth::user();
         if ($user->hasRole("admin|staff")) {
-            return 'admin/kostan';
+            return 'admin/dashboard';
         } else if($user->hasRole("pemilik-kost")) {
-            return 'pemilik_kost/kostan';
+            return 'pemilik_kost/dashboard';
         }else{
             return '/';
         }

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TypeKamarExport;
 use App\Models\DetailFasilitas;
 use App\Models\Kostan;
 use App\Models\TypeKamar;
 use App\Models\Fasilitas;
 use App\Models\PemilikKost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class TypeKamarController extends Controller
 {
@@ -22,7 +26,7 @@ class TypeKamarController extends Controller
         $user = \Auth::user();
         $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
         if (!$user->hasRole("admin|staff")) {
-            $data = TypeKamar::join('kostan', 'kostan_id', '=', 'kostan.id')->where('pemilik_kost_id', $pemilik_kost->id)->get();
+            $data = TypeKamar::join('kostan', 'kostan_id', '=', 'kostan.id')->select('type_kamar.*')->where('pemilik_kost_id', $pemilik_kost->id)->get();
         }else{
             $data = TypeKamar::get();
         }
@@ -54,6 +58,7 @@ class TypeKamarController extends Controller
     {
         //
         $kostan_id = $request->kostan_id;
+        $kostan = Kostan::findOrFail($kostan_id);
         $nama_kamar = $request->nama;
         $peraturan = $request->peraturan;
         $ukuran = $request->ukuran[0]."x".$request->ukuran[1];
@@ -64,6 +69,7 @@ class TypeKamarController extends Controller
         $tipe_kamar = TypeKamar::create([
             'kostan_id' => $kostan_id,
             'nama' => $nama_kamar,
+            'slug' => Str::slug($kostan->slug."-".$nama_kamar),
             'ukuran_kamar' => $ukuran,
             'peraturan' => $peraturan,
             'harga' => $harga,
@@ -81,7 +87,7 @@ class TypeKamarController extends Controller
             # code...
             return redirect('admin/type_kamar')->with('message', 'Data Add Successfully');
         } else {
-            return redirect('pemilik_kost/pemilik_kost')->with('message', 'Data Add Successfully');
+            return redirect('pemilik_kost/type_kamar')->with('message', 'Data Add Successfully');
         }
 
     }
@@ -105,8 +111,10 @@ class TypeKamarController extends Controller
      */
     public function edit($id)
     {
-        $kostan = Kostan::get();
-        $fasilitas = Fasilitas::get();
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        $kostan = Kostan::where('pemilik_kost_id', $pemilik_kost->id)->get();
+        $fasilitas = Fasilitas::where('pemilik_kost_id', $pemilik_kost->id)->get();
         $data = TypeKamar::findOrFail($id);
         return view('admin.type_kamar.edit', compact('kostan', 'fasilitas','data'));
     }
@@ -173,5 +181,21 @@ class TypeKamarController extends Controller
         } else {
             return redirect('pemilik_kost/type_kamar')->with('message', 'Data Delete Successfully');
         }
+    }
+    public function pdf()
+    {
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        if (!$user->hasRole("admin|staff")) {
+            $data = TypeKamar::join('kostan', 'kostan_id', '=', 'kostan.id')->where('pemilik_kost_id', $pemilik_kost->id)->get();
+        } else {
+            $data = TypeKamar::get();
+        }
+        $pdf = PDF::loadView('admin.type_kamar.pdf', ['data' => $data]);
+        return $pdf->setPaper('a4', 'landscape')->setWarnings(false)->download('type_kamar_' . date('d-m-Y') . '_.pdf');
+    }
+    public function excel()
+    {
+        return Excel::download(new TypeKamarExport, 'typekamar.xlsx');
     }
 }

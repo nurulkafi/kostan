@@ -10,4 +10,8 @@ class Provinsi extends Model
     use HasFactory;
     protected $table = 'provinsi';
     protected $guarded = [];
+    public function kabupaten($id){
+        $data = Kabupaten::where('provinsi_id',$id)->get();
+        return $data;
+    }
 }
