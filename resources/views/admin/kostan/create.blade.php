@@ -21,11 +21,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Nama Kostan</label>
-                            <input type="text" required name="nama" id="" class="form-control">
+                            <input type="text" name="nama" id="" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}">
+                            @error('nama')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tipe Kostan / Gender</label>
-                            <select name="gender" required class="custom-select">
+                            <select name="gender" required class="custom-select @error('gender') is-invalid @enderror" >
                                 <option selected>-- Pilih Gender --</option>
                                 <option value="Laki-Laki">Laki-Laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -34,11 +39,11 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea type="text" required class="form-control round" name="deskripsi"  id="editor"></textarea>
+                            <textarea type="text" class="form-control round @error('deskripsi') is-invalid @enderror" name="deskripsi"  id="editor">{!! old('deskripsi') !!}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="">Provinsi</label>
-                            <select name="provinsi_id" required id="provinsi" class="custom-select">
+                            <select required name="provinsi_id" id="provinsi" class="custom-select">
                                 <option selected>-- Pilih Provinsi --</option>
                                 @foreach ($provinsi as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -47,13 +52,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Kabupaten / Kota</label>
-                            <select name="kabupaten_id" required id="kabupaten" class="custom-select">
+                            <select required name="kabupaten_id" id="kabupaten" class="custom-select">
                                 <option selected>-- Pilih Kabupaten --</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Alamat Lengkap</label>
-                            <textarea class="form-control" required id="exampleFormControlTextarea1" name="alamat"></textarea>
+                            <textarea class="form-control @error('alamat') is-invalid @enderror" id="exampleFormControlTextarea1" name="alamat">{{ old('alamat') }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -62,7 +67,7 @@
                             <br>
                             <img id="output" class="img-thumbnail mb-2" width="150px" height="150px"  />
                             <br>
-                            <input type="file" name="image[]" required class="form-control" accept="image/*" onchange="loadFile(event)">
+                            <input type="file" required name="image[]" class="form-control" accept="image/*" onchange="loadFile(event)">
                         </div>
                         <div class="form-group">
                             <label for="">Foto 2</label>

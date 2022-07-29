@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <label for="">Provinsi</label>
                             <select name="provinsi_id" required id="provinsi" class="custom-select">
-                                <option selected>{{ $data->alamat->kabupaten->provinsi->title}}</option>
+                                <option selected>{{ $data->provinsi($data->id)->title}}</option>
                                 @foreach ($provinsi as $item)
                                 @if ($item->title !=  $data->alamat->kabupaten->provinsi->title)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -93,10 +93,10 @@
                         <div class="form-group">
                             <label for="">Kabupaten / Kota</label>
                             <select name="kabupaten_id" required id="kabupaten" class="custom-select">
-                                <option value="{{ $data->alamat->kabupaten->id }}" selected>{{ $data->alamat->kabupaten->title }}</option>
+                                <option value="{{ $data->kabupaten($data->id)->code }}" selected>{{ $data->kabupaten($data->id)->title }}</option>
                                 @foreach ($kota as $item2)
-                                @if ($item2->code !=  $data->alamat->kabupaten->code)
-                                <option value="{{ $item2->provinsi_id }}">{{ $item2->title }}</option>
+                                @if ($item2->code !=  $data->kabupaten($data->id)->code)
+                                <option value="{{ $item2->code }}">{{ $item2->title }}</option>
                                 @endif
                                 @endforeach
                             </select>

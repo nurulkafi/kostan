@@ -14,15 +14,26 @@
                       <form>
                         <div class="input-group">
                             @if (Auth::user()->hasRole('admin|staff'))
-                            <a href="{{ url('admin/kostan/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            {{-- <a href="{{ url('admin/kostan/create') }}" class="btn btn-primary mr-2"><i class="bi bi-plus"></i>Tambah Data</a> --}}
                             @else
-                            <a href="{{ url('pemilik_kost/kostan/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            <a href="{{ url('pemilik_kost/kostan/create') }}" class="btn btn-primary mr-2"><i class="bi bi-plus"></i>Tambah Data</a>
                             @endif
                         </div>
                       </form>
                     </div>
                   </div>
                   <div class="card-body">
+                      <div class="float-right">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            @if (Auth::user()->hasRole('admin|staff'))
+                            <a href="{{ url('admin/kostan/cetak/pdf') }}" class="btn btn-danger icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+                            <a href="{{ url('admin/kostan/cetak/excel') }}" class="btn btn-success icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> EXCEL</a>
+                            @else
+                            <a href="{{ url('pemilik_kost/kostan/cetak/pdf') }}" class="btn btn-danger icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+                            <a href="{{ url('pemilik_kost/kostan/cetak/excel') }}" class="btn btn-success icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> EXCEL</a>
+                            @endif
+                          </div>
+                      </div>
                     <div class="table-responsive p-sm-1">
                       <table class="table table-striped" id="myTable">
                         <thead>
@@ -49,15 +60,15 @@
                                         <form method="POST" action="{{ url('admin/kostan/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('admin/kostan/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
-                                        <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
+                                        <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="bi bi-trash"></i>Delete</button>
                                         </form>
                                         @else
                                         <form method="POST" action="{{ url('pemilik_kost/kostan/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('pemilik_kost/kostan/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
-                                        <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
+                                        <a href="{{ url('pemilik_kost/kostan/'.$item->id) }}" class="btn btn-sm btn-icon icon-left btn-info"><i class="bi bi-eye"></i> Detail</a>
+                                        <a href="{{ url('pemilik_kost/kostan/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="bi bi-pen"></i> Edit</a>
+                                        <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="bi bi-trash"></i>Delete</button>
                                         </form>
                                         @endif
 

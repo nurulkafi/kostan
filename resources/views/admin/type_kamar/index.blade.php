@@ -14,7 +14,7 @@
                       <form>
                         <div class="input-group">
                             @if (Auth::user()->hasRole('admin|staff'))
-                            <a href="{{ url('admin/type_kamar/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
+                            {{-- <a href="{{ url('admin/type_kamar/create') }}" class="btn btn-primary mr-2">Tambah Data</a> --}}
                             @else
                             <a href="{{ url('pemilik_kost/type_kamar/create') }}" class="btn btn-primary mr-2">Tambah Data</a>
                             @endif
@@ -24,11 +24,23 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <div class="float-right">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            @if (Auth::user()->hasRole('admin|staff'))
+                            <a href="{{ url('admin/type_kamar/cetak/pdf') }}" class="btn btn-danger icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+                            <a href="{{ url('admin/type_kamar/cetak/excel') }}" class="btn btn-success icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> EXCEL</a>
+                            @else
+                            <a href="{{ url('pemilik_kost/type_kamar/cetak/pdf') }}" class="btn btn-danger icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+                            <a href="{{ url('pemilik_kost/type_kamar/cetak/excel') }}" class="btn btn-success icon-left text-white"><i class="bi bi-file-earmark-pdf"></i> EXCEL</a>
+                            @endif
+                          </div>
+                      </div>
                     <div class="table-responsive p-sm-1">
                       <table class="table table-striped" id="myTable">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Nama Kostan</th>
                                 <th>Nama Tipe Kamar</th>
                                 <th>Ukuran Kamar</th>
                                 <th>Harga</th>
@@ -43,6 +55,7 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
+                                <td>{{ $item->kost($item->kostan_id)->nama }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->ukuran_kamar }}</td>
                                 <td>{{ number_format($item->harga, 0, '', '.'), }}</td>
@@ -52,7 +65,7 @@
                                     <form method="POST" action="{{ url('admin/type_kamar/'.$item->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url('admin/type_kamar/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
+                                        {{-- <a href="{{ url('admin/type_kamar/'.$item->id.'/edit') }}" class="btn btn-sm btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a> --}}
                                         <button type="submit" class="btn btn-icon btn-sm icon-left btn-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash"></i>Delete</button>
                                     </form>
                                     @else

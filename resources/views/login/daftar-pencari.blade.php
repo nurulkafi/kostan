@@ -1,12 +1,15 @@
 @extends('login.index')
 @section('isi')
 
-<div class="row login-field">
+<div class="row login-field ">
   <div class="col mt-auto">
-    <img src="{{url('images/graphics/daftar_p.png/')}}" width="90%" alt="">
+    <img src="{{url('images/graphics/daftar_cari_3.png/')}}" width="90%" alt="">
   </div>
-  <div class="col px-auto my-auto">
-    <h3 class="judul text-center">Daftar Pemilik Kos</h3>
+  <div class="col mt-6">
+    <button type="button" class="btn btn-danger">
+      <a href="{{url('/')}}" class="text-white " style="text-decoration: none"><i class="bi bi-arrow-left"></i> Kembali</a>
+    </button>
+    <h3 class="judul text-center">Daftar Pencari Kos</h3>
     @if ($errors->any())
     <div class="alert alert-danger text-white" role="alert">
         <ul>
@@ -16,11 +19,11 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="{{ url('daftar-pencari/register') }}">
+    <form method="POST" action="{{ url('daftar-pencari/register') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="Email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="Email" aria-describedby="emailHelp">
+            <input type="email" name="email" class="form-control" value="{{ old('email') }}" id="Email" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="Password" class="form-label">Password</label>
@@ -28,31 +31,54 @@
         </div>
         <div class="mb-3">
           <label for="nama" class="form-label">Nama Lengkap</label>
-          <input type="text" name="nama" class="form-control" id="nama" aria-describedby="emailHelp">
+          <input type="text" name="nama" class="form-control" id="nama" value="{{ old('nama') }}" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="nama" class="form-label">Tanggal Lahir</label>
-          <input type="date" name="tgl_lahir" class="form-control" id="nama" aria-describedby="emailHelp">
+            <label for="nama" class="form-label">Tanggal Lahir</label>
+            <input type="date" name="tgl_lahir" class="form-control" id="nama" value="{{ old('tgl_lahir') }}" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="noHp" class="form-label">Jenis Kelamin</label>
+            <br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jk" id="inlineRadio1" value="Laki-Laki">
+                <label class="form-check-label" for="inlineRadio1">Laki-Laki</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jk" id="inlineRadio2" value="Perempuan">
+                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+            </div>
         </div>
         <div class="mb-3">
             <label for="noHp" class="form-label">Alamat</label>
-            <textarea name="alamat" id="" class="form-control" rows="3"></textarea>
+            <textarea name="alamat" id="" class="form-control" rows="3">{{ old('alamat') }}</textarea>
         </div>
         <div class="mb-3">
             <label for="noHp" class="form-label">Nomor Handphone</label>
-            <input type="text" name="no_hp" class="form-control" id="noHp">
+            <input type="text" name="no_hp" class="form-control" id="noHp" value="{{ old('no_hp') }}">
         </div>
-
+        <div class="mb-4">
+            <label for="" class="form-label">Foto Profil</label>
+            <br>
+            <img id="output" class="img-thumbnail mb-2" width="200px" height="200px"  />
+            <br>
+            <input type="file" name="image" class="form-control" accept="image/*" onchange="loadFile(event)">
+        </div>
         <div class="d-grid gap-2 col-12 mx-auto">
             <button type="submit" class="btn btn-success">Daftar</button >
         </div>
     </form>
-    <small class="d-block text-center mt-3">Sudah memiliki akun? <a href="{{url('/masuk-pemilik')}}">login</a></small>
+    <small class="d-block text-center mt-3 mb-6">Sudah memiliki akun? <a href="{{url('/masuk-pencari')}}">login</a></small>
 
-    <button type="button" class="btn btn-danger mt-5">
-      <a href="{{url('/')}}" class="text-white " style="text-decoration: none">kembali</a>
-    </button>
   </div>
 </div>
-
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
 @endsection

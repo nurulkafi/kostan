@@ -14,5 +14,15 @@ class Fasilitas extends Model
     {
         return $this->belongsToMany(TypeKamar::class);
     }
-    
+    public function count()
+    {
+        $user = \Auth::user();
+        $pemilik_kost = PemilikKost::where('users_id', $user->id)->first();
+        if ($user->hasRole("admin|staff")) {
+            $data = Fasilitas::latest()->get();
+        } else {
+            $data = Fasilitas::where('pemilik_kost_id', $pemilik_kost->id)->get();
+        }
+        return $data;
+    }
 }

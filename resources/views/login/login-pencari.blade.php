@@ -1,11 +1,14 @@
 @extends('login.index')
 @section('isi')
 
-<div class="row login-field">
+<div class="row login-field mt-6">
   <div class="col mt-auto">
-    <img src="{{url('images/graphics/login_c.png/')}}" width="95%" alt="">
+    <img src="{{url('images/graphics/daftar_cari_2.png/')}}" width="95%" alt="">
   </div>
-  <div class="col px-auto my-auto">
+  <div class="col mt-6">
+    <button type="button" class="btn btn-danger">
+      <a href="{{url('/')}}" class="text-white " style="text-decoration: none"><i class="bi bi-arrow-left"></i> Kembali</a>
+    </button>
     <h3 class="judul text-center">Login Pencari Kos</h3>
     <form method="POST" action="{{ route('login') }}">
     @csrf
@@ -24,10 +27,6 @@
       </div>
     </form>
     <small class="d-block text-center mt-3">Belum Memililiki Akun? <a href="{{url('/daftar-pencari')}}">Registrasi Disini</a></small>
-
-    <button type="button" class="btn btn-danger mt-5">
-      <a href="{{url('/')}}" class="text-white " style="text-decoration: none">kembali</a>
-    </button>
   </div>
 </div>
 

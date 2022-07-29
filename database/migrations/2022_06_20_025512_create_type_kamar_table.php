@@ -17,6 +17,7 @@ class CreateTypeKamarTable extends Migration
             $table->id();
             $table->unsignedBigInteger('kostan_id');
             $table->string('nama');
+            $table->string('slug');
             $table->string('ukuran_kamar');
             $table->text('peraturan');
             $table->integer('harga');
